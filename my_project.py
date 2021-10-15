@@ -17,8 +17,17 @@ class Student:
         else:
             return 'Ошибка'
 
+    def avg_rate(self):
+        for values in self.grades.values():
+            return round(sum(values) / len(values), 1)
+
     def __str__(self):
-        pass
+        res = f'Имя: {self.name}\n' \
+              f'Фамилия: {self.surname}\n' \
+              f'Средняя оценка за домашние задания: {self.avg_rate()}\n' \
+              f'Курсы в процессе изучения: {", ".join(self.courses_in_progress)}\n' \
+              f'Завершенные курсы: {", ".join(self.finished_courses)}'
+        return res
 
 
 class Mentor:
@@ -33,12 +42,8 @@ class Lecturer(Mentor):
         super().__init__(name, surname)
         self.grades = {}
 
-    def avg_rate(self):
-        for values in self.grades.values():
-            return round(sum(values) / len(values), 1)
-
     def __str__(self):
-        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.avg_rate()}'
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {Student.avg_rate(self)}'
         return res
 
 
@@ -59,26 +64,31 @@ class Reviewer(Mentor):
 
 some_student = Student('Some', 'Buddy', 'your_gender')
 some_student.courses_in_progress += ['Python']
+some_student.courses_in_progress += ['Git']
+some_student.finished_courses += ['Введение в программирование']
 
 some_reviewer = Reviewer('Some', 'Buddy')
 some_reviewer.courses_attached += ['Python']
 
 some_lecturer = Lecturer('Some', 'Buddy')
-some_lecturer.courses_attached += ['Git']
+some_lecturer.courses_attached += ['JS']
 
 other_student = Student('Some', 'Buddy', 'your_gender')
-other_student.courses_in_progress += ['Git']
+other_student.courses_in_progress += ['JS']
 
 some_reviewer.rate_hw(some_student, 'Python', 9)
 some_reviewer.rate_hw(some_student, 'Python', 6)
-some_reviewer.rate_hw(some_student, 'Python', 8)
+some_reviewer.rate_hw(some_student, 'Python', 10)
 
-other_student.rate_lecture(some_lecturer, 'Git', 7)
-other_student.rate_lecture(some_lecturer, 'Git', 9)
-other_student.rate_lecture(some_lecturer, 'Git', 10)
+other_student.rate_lecture(some_lecturer, 'JS', 7)
+other_student.rate_lecture(some_lecturer, 'JS', 9)
+other_student.rate_lecture(some_lecturer, 'JS', 10)
+other_student.rate_lecture(some_lecturer, 'JS', 6)
+other_student.rate_lecture(some_lecturer, 'JS', 5)
 #
 print(f'Оценки студентов: {some_student.grades}', '\n')
 print(f'Оценки преподавателей: {some_lecturer.grades}', '\n')
 
 print(some_reviewer, '\n')
 print(some_lecturer, '\n')
+print(some_student, '\n')
