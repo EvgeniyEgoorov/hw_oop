@@ -42,25 +42,26 @@ class Reviewer(Mentor):
             return 'Ошибка'
 
 
-best_student = Student('Roy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
+some_student = Student('Some', 'Buddy', 'your_gender')
+some_student.courses_in_progress += ['Python']
 
-cool_mentor = Reviewer('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
+some_reviewer = Reviewer('Some', 'Buddy')
+some_reviewer.courses_attached += ['Python']
 
-best_mentor = Lecturer('Some', 'Buddy')
-best_mentor.courses_attached += ['Git']
+some_lecturer = Lecturer('Some', 'Buddy')
+some_lecturer.courses_attached += ['Git']
 
-cool_student = Student('Roy', 'Eman', 'your_gender')
-cool_student.courses_in_progress += ['Git']
+other_student = Student('Some', 'Buddy', 'your_gender')
+other_student.courses_in_progress += ['Git']
 
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
+some_reviewer.rate_hw(some_student, 'Python', 9)
+some_reviewer.rate_hw(some_student, 'Python', 6)
+some_reviewer.rate_hw(some_student, 'Python', 8)
 
-cool_student.rate_lecture(best_mentor, 'Git', 10)
-cool_student.rate_lecture(best_mentor, 'Git', 10)
-cool_student.rate_lecture(best_mentor, 'Git', 10)
+other_student.rate_lecture(some_lecturer, 'Git', 7)
+other_student.rate_lecture(some_lecturer, 'Git', 9)
+other_student.rate_lecture(some_lecturer, 'Git', 10)
 #
-print(best_student.grades)
-print(best_mentor.grades)
+print(f'Оценки студентов: {some_student.grades}')
+print(f'Оценки преподавателей: {some_lecturer.grades}')
+
