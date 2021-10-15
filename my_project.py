@@ -17,6 +17,9 @@ class Student:
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        pass
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -30,6 +33,14 @@ class Lecturer(Mentor):
         super().__init__(name, surname)
         self.grades = {}
 
+    def avg_rate(self):
+        for values in self.grades.values():
+            return round(sum(values) / len(values), 1)
+
+    def __str__(self):
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.avg_rate()}'
+        return res
+
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -40,6 +51,10 @@ class Reviewer(Mentor):
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
+
+    def __str__(self):
+        res = f'Имя: {self.name}\nФамилия: {self.surname}'
+        return res
 
 
 some_student = Student('Some', 'Buddy', 'your_gender')
@@ -62,6 +77,8 @@ other_student.rate_lecture(some_lecturer, 'Git', 7)
 other_student.rate_lecture(some_lecturer, 'Git', 9)
 other_student.rate_lecture(some_lecturer, 'Git', 10)
 #
-print(f'Оценки студентов: {some_student.grades}')
-print(f'Оценки преподавателей: {some_lecturer.grades}')
+print(f'Оценки студентов: {some_student.grades}', '\n')
+print(f'Оценки преподавателей: {some_lecturer.grades}', '\n')
 
+print(some_reviewer, '\n')
+print(some_lecturer, '\n')
