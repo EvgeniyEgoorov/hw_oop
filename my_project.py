@@ -85,6 +85,7 @@ other_student.courses_in_progress += ['Python']
 other_student.courses_in_progress += ['JS']
 
 some_lecturer = Lecturer('Jake', 'Smith')
+some_lecturer.courses_attached += ['Python']
 some_lecturer.courses_attached += ['JS']
 
 other_lecturer = Lecturer('Jo', 'Black')
@@ -120,8 +121,8 @@ other_student.rate_lecture(other_lecturer, 'JS', 7)
 other_student.rate_lecture(other_lecturer, 'JS', 1)
 
 #
-print(f'Оценки студентов: {some_student.grades}', '\n')
-print(f'Оценки преподавателей: {some_lecturer.grades}', '\n')
+print(f'Оценки студента {some_student.name}: {some_student.grades}', '\n')
+print(f'Оценки преподавателя {some_lecturer.name}: {some_lecturer.grades}', '\n')
 
 print(some_reviewer, '\n')
 print(some_lecturer, '\n')
