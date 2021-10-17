@@ -77,6 +77,7 @@ class Reviewer(Mentor):
 some_student = Student('Tom', 'Jones', 'your_gender')
 some_student.courses_in_progress += ['Python']
 some_student.courses_in_progress += ['Git']
+some_student.courses_in_progress += ['JS']
 some_student.finished_courses += ['Введение в программирование']
 
 other_student = Student('Peter', 'Hunt', 'your_gender')
@@ -92,22 +93,31 @@ other_lecturer.courses_attached += ['JS']
 
 some_reviewer = Reviewer('Billy', 'Baxter')
 some_reviewer.courses_attached += ['Python']
+some_reviewer.courses_attached += ['JS']
 
-some_reviewer.rate_hw(some_student, 'Python', 9)
+some_reviewer.rate_hw(some_student, 'Python', 10)
 some_reviewer.rate_hw(some_student, 'Python', 6)
 some_reviewer.rate_hw(some_student, 'Python', 10)
 
 some_reviewer.rate_hw(other_student, 'Python', 4)
-some_reviewer.rate_hw(other_student, 'Python', 5)
+some_reviewer.rate_hw(other_student, 'Python', 10)
 some_reviewer.rate_hw(other_student, 'Python', 8)
+
+some_reviewer.rate_hw(some_student, 'JS', 9)
+some_reviewer.rate_hw(some_student, 'JS', 6)
+some_reviewer.rate_hw(some_student, 'JS', 10)
+
+some_reviewer.rate_hw(other_student, 'JS', 7)
+some_reviewer.rate_hw(other_student, 'JS', 10)
+some_reviewer.rate_hw(other_student, 'JS', 5)
 
 other_student.rate_lecture(some_lecturer, 'JS', 7)
 other_student.rate_lecture(some_lecturer, 'JS', 9)
-other_student.rate_lecture(some_lecturer, 'JS', 10)
+other_student.rate_lecture(some_lecturer, 'JS', 3)
 
-other_student.rate_lecture(other_lecturer, 'JS', 5)
-other_student.rate_lecture(other_lecturer, 'JS', 7)
 other_student.rate_lecture(other_lecturer, 'JS', 9)
+other_student.rate_lecture(other_lecturer, 'JS', 7)
+other_student.rate_lecture(other_lecturer, 'JS', 1)
 
 #
 print(f'Оценки студентов: {some_student.grades}', '\n')
@@ -117,5 +127,29 @@ print(some_reviewer, '\n')
 print(some_lecturer, '\n')
 print(some_student, '\n')
 
-print(some_student < other_student)
-print(some_lecturer > other_lecturer)
+print(some_student < other_student, '\n')
+print(some_lecturer > other_lecturer, '\n')
+
+
+course_participants = [some_student, other_student]
+
+
+def avg_students_rate(students, course):
+    total_avg_rate = []
+    for student in students:
+        total_avg_rate.append(sum(student.grades[course]) / len(student.grades[course]))
+    print(f'Средняя оценка студентов на курсе {course}: {round(sum(total_avg_rate) / len(total_avg_rate), 1)}')
+
+
+course_lecturers = [some_lecturer, other_lecturer]
+
+
+def avg_lecturer_rate(lecturers, course):
+    total_avg_rate = []
+    for lecturer in lecturers:
+        total_avg_rate.append(sum(lecturer.grades[course]) / len(lecturer.grades[course]))
+    print(f'Средняя оценка лекторов на курсе {course}: {round(sum(total_avg_rate) / len(total_avg_rate), 1)}')
+
+
+avg_students_rate(course_participants, 'Python')
+avg_lecturer_rate(course_participants, 'JS')
